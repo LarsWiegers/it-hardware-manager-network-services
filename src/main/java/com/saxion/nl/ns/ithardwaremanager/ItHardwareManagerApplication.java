@@ -1,4 +1,4 @@
-package com.saxion.nl.ns.ithardwaremanager;
+package main.java.com.saxion.nl.ns.ithardwaremanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
