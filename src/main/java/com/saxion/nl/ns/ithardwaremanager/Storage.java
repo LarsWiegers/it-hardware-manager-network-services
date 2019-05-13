@@ -13,7 +13,7 @@ public class Storage implements StorageInterface {
 
     public ArrayList<Room> getRooms() {
         return new ArrayList<>(rooms);
-    }
+    }   
 
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;

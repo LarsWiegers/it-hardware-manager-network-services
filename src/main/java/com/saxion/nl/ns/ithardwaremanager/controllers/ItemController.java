@@ -1,6 +1,6 @@
 package com.saxion.nl.ns.ithardwaremanager.controllers;
 
-import com.saxion.nl.ns.ithardwaremanager.Storage;
+import com.saxion.nl.ns.ithardwaremanager.StorageContainer;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
@@ -25,7 +25,7 @@ public class ItemController {
     ItemController() {
         // TODO use dependency injection here so we dont specify
         // TODO the real class we want but the contract we would like to use
-        this.storage = new Storage();
+        this.storage = StorageContainer.getStorage();
     }
 
     /**
@@ -48,13 +48,14 @@ public class ItemController {
      */
     @GetMapping(path = "")
     @ResponseBody
-    public void index() {
+    public String index() {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
         for (Room room : rooms) {
             items.addAll(room.getItems());
         }
         // TODO return an thymeleaf index page
+        return items.toString();
     }
 
     /**

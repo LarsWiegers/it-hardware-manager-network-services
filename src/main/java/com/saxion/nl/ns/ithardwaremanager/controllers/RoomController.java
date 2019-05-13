@@ -1,6 +1,7 @@
 package com.saxion.nl.ns.ithardwaremanager.controllers;
 
 import com.saxion.nl.ns.ithardwaremanager.Storage;
+import com.saxion.nl.ns.ithardwaremanager.StorageContainer;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ public class RoomController {
      * Add storage to RoomController
      */
     RoomController() {
-        this.storage = new Storage();
+        this.storage = StorageContainer.getStorage();
     }
 
     /**

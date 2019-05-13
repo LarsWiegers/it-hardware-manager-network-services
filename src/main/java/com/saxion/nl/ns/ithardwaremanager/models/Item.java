@@ -40,6 +40,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "( " + this.getName() + " , " + this.getDescription() + " )";
+        return "## " + this.getName() + ", " + this.getUuid() + ", " + this.getDescription();
     }
 }
