@@ -1,6 +1,7 @@
 package com.saxion.nl.ns.ithardwaremanager;
 
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
+import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 
 import java.util.ArrayList;
@@ -39,5 +40,16 @@ public class Storage implements StorageInterface {
                 this.rooms.set(i, room);
             }
         }
+    }
+
+    public Item getItemByUUID(UUID itemUuid) {
+        for (Room room: rooms) {
+            for(Item item : room.getItems()) {
+                if(item.getUuid() == itemUuid) {
+                    return item;
+                }
+            }
+        }
+        return null;
     }
 }
