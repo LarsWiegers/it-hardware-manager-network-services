@@ -55,7 +55,7 @@ public class Room implements Serializable {
     }
 
     public String toString() {
-        return this.getName() + ", " + this.items;
+        return this.getName() + ", " + this.getUuid() + ", " + this.items;
     }
 
     /**

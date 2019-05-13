@@ -46,8 +46,16 @@ public interface StorageInterface {
 
     /**
      * Returns the item that is associated with the uuid
+     *
      * @param itemUuid UUID
      * @return item Item
      */
     Item getItemByUUID(UUID itemUuid);
+
+    /**
+     * Remove a room
+     *
+     * @param room
+     */
+    void removeRoom(Room room);
 }

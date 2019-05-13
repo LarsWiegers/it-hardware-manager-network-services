@@ -29,20 +29,6 @@ public class ItemController {
     }
 
     /**
-     * Return a list of items
-     */
-    @GetMapping(path = "/")
-    @ResponseBody
-    public void index() {
-        ArrayList<Room> rooms = this.storage.getRooms();
-        ArrayList<Item> items = new ArrayList<Item>();
-        for (Room room: rooms) {
-            items.addAll(room.getItems());
-        }
-        // TODO return an thymeleaf index page
-    }
-
-    /**
      * Add an item to an existing room
      *
      * @param item     Item
@@ -51,18 +37,32 @@ public class ItemController {
     @PostMapping(path = "/add/{roomUuid}")
     @ResponseBody
     public void add(@RequestBody Item item,
-                    @PathVariable String roomUuid) {
-        Room room = this.storage.getRoomByUUID(UUID.fromString(roomUuid));
+                    @PathVariable UUID roomUuid) {
+        Room room = this.storage.getRoomByUUID(roomUuid);
         room.addItem(item);
         this.storage.updateRoom(room);
     }
 
     /**
-     * Show an page that allows the user to edit the item
+     * Return a list of items
+     */
+    @GetMapping(path = "")
+    @ResponseBody
+    public void index() {
+        ArrayList<Room> rooms = this.storage.getRooms();
+        ArrayList<Item> items = new ArrayList<>();
+        for (Room room : rooms) {
+            items.addAll(room.getItems());
+        }
+        // TODO return an thymeleaf index page
+    }
+
+    /**
+     * Show a page that allows the user to edit the item
      */
     @GetMapping(path = "/get/{uuid}")
     @ResponseBody
-    public void edit() {
+    public void edit(@PathVariable UUID uuid) {
         // TODO thymeleaf edit page
     }
 
@@ -71,10 +71,10 @@ public class ItemController {
      */
     @PostMapping(path = "/remove/{roomUuid}/{itemUuid}")
     @ResponseBody
-    public void remove(@PathVariable String roomUuid,
-                       @PathVariable String itemUuid) {
-        Room room = this.storage.getRoomByUUID(UUID.fromString(roomUuid));
-        Item item = this.storage.getItemByUUID(UUID.fromString(itemUuid));
+    public void remove(@PathVariable UUID roomUuid,
+                       @PathVariable UUID itemUuid) {
+        Room room = this.storage.getRoomByUUID(roomUuid);
+        Item item = this.storage.getItemByUUID(itemUuid);
         room.removeItem(item);
         this.storage.updateRoom(room);
     }

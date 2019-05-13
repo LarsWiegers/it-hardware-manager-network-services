@@ -24,32 +24,40 @@ public class Storage implements StorageInterface {
     }
 
     public Room getRoomByUUID(UUID uuid) {
-        Room returnRoom = null;
         for (Room room : rooms) {
-            if (room.getUuid() == uuid) {
-                returnRoom = room;
+            if (room.getUuid().equals(uuid)) {
+                return room;
             }
         }
-        return returnRoom;
+        return null;
     }
 
     public void updateRoom(Room room) {
-        UUID roomUUid = room.getUuid();
+        UUID uuid = room.getUuid();
         for (int i = 0; i < rooms.size(); i++) {
-            if(rooms.get(i).getUuid() == roomUUid) {
+            if (rooms.get(i).getUuid().equals(uuid)) {
                 this.rooms.set(i, room);
             }
         }
     }
 
-    public Item getItemByUUID(UUID itemUuid) {
-        for (Room room: rooms) {
-            for(Item item : room.getItems()) {
-                if(item.getUuid() == itemUuid) {
+    public Item getItemByUUID(UUID uuid) {
+        for (Room room : rooms) {
+            for (Item item : room.getItems()) {
+                if (item.getUuid().equals(uuid)) {
                     return item;
                 }
             }
         }
         return null;
+    }
+
+    public void removeRoom(Room room) {
+        UUID uuid = room.getUuid();
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i).getUuid().equals(uuid)) {
+                this.rooms.remove(i);
+            }
+        }
     }
 }
