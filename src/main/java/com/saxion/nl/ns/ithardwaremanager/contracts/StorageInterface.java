@@ -3,6 +3,7 @@ package com.saxion.nl.ns.ithardwaremanager.contracts;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public interface StorageInterface {
 
@@ -26,4 +27,12 @@ public interface StorageInterface {
      * @param room new Room(String name, String description)
      */
     void addRoom(Room room);
+
+    /**
+     * Returns the room that is associated with the uuid
+     *
+     * @param uuid Uuid
+     * @return room Room
+     */
+    Room getRoomByUUID(UUID uuid);
 }
