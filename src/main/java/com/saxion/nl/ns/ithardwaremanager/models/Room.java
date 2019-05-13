@@ -2,11 +2,13 @@ package com.saxion.nl.ns.ithardwaremanager.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Room implements Serializable {
     private String name;
     private ArrayList<Item> items = new ArrayList<>();
     private String description;
+    private UUID uuid;
 
     /**
      * Main constructor used
@@ -17,6 +19,7 @@ public class Room implements Serializable {
     public Room(String name, String description) {
         this.setName(name);
         this.setDescription(description);
+        this.setUuid(UUID.randomUUID());
     }
 
     public void setDescription(String description) {
@@ -41,6 +44,14 @@ public class Room implements Serializable {
 
     public void addItem(Item item) {
         this.items.add(item);
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String toString() {

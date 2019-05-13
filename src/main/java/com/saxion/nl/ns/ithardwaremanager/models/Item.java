@@ -1,14 +1,17 @@
 package com.saxion.nl.ns.ithardwaremanager.models;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Item implements Serializable {
     private String name;
     private String description;
+    private UUID uuid;
 
     public Item(String name, String description) {
         this.setName(name);
         this.setDescription(description);
+        this.setUuid(UUID.randomUUID());
     }
 
     private void setName(String name) {
@@ -25,6 +28,14 @@ public class Item implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override

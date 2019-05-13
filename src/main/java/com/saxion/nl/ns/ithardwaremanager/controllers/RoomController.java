@@ -21,4 +21,10 @@ public class RoomController {
     public void add(@RequestBody Room room) {
         storage.addRoom(room);
     }
+
+    @GetMapping(path = "/get/{uuid}")
+    @ResponseBody
+    public void edit() {
+    }
+
 }
