@@ -4,6 +4,7 @@ import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Storage implements StorageInterface {
 
@@ -19,5 +20,15 @@ public class Storage implements StorageInterface {
 
     public void addRoom(Room room) {
         this.rooms.add(room);
+    }
+
+    public Room getRoomByUUID(UUID uuid) {
+        Room returnRoom = null;
+        for (Room room : rooms) {
+            if (room.getUuid() == uuid) {
+                returnRoom = room;
+            }
+        }
+        return returnRoom;
     }
 }
