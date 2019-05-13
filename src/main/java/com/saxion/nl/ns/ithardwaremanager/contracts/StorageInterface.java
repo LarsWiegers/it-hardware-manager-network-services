@@ -1,5 +1,6 @@
 package com.saxion.nl.ns.ithardwaremanager.contracts;
 
+import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 
 import java.util.ArrayList;
@@ -42,4 +43,11 @@ public interface StorageInterface {
      * @param room Room
      */
     void updateRoom(Room room);
+
+    /**
+     * Returns the item that is associated with the uuid
+     * @param itemUuid UUID
+     * @return item Item
+     */
+    Item getItemByUUID(UUID itemUuid);
 }
