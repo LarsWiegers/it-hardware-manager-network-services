@@ -35,4 +35,11 @@ public interface StorageInterface {
      * @return room Room
      */
     Room getRoomByUUID(UUID uuid);
+
+    /**
+     * Update the room
+     *
+     * @param room Room
+     */
+    void updateRoom(Room room);
 }

@@ -31,4 +31,13 @@ public class Storage implements StorageInterface {
         }
         return returnRoom;
     }
+
+    public void updateRoom(Room room) {
+        UUID roomUUid = room.getUuid();
+        for (int i = 0; i < rooms.size(); i++) {
+            if(rooms.get(i).getUuid() == roomUUid) {
+                this.rooms.set(i, room);
+            }
+        }
+    }
 }
