@@ -1,4 +1,4 @@
-package main.java.com.saxion.nl.ns.ithardwaremanager.models;
+package com.saxion.nl.ns.ithardwaremanager.models;
 
 import java.io.Serializable;
 
@@ -10,7 +10,6 @@ public class Item implements Serializable {
         this.setName(name);
         this.setDescription(description);
     }
-
 
     private void setName(String name) {
         this.name = name;

@@ -1,4 +1,4 @@
-package main.java.com.saxion.nl.ns.ithardwaremanager.models;
+package com.saxion.nl.ns.ithardwaremanager.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +10,8 @@ public class Room implements Serializable {
 
     /**
      * Main constructor used
-     * @param name the name
+     *
+     * @param name        the name
      * @param description the description
      */
     public Room(String name, String description) {
@@ -21,6 +22,7 @@ public class Room implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getDescription() {
         return this.description;
     }
@@ -44,13 +46,15 @@ public class Room implements Serializable {
     public String toString() {
         return this.getName() + ", " + this.items;
     }
+
     /**
      * Remove an item from the current items we have
+     *
      * @param item the item to be removed
      */
     public void removeItem(Item item) {
         for (int i = 0; i < this.items.size(); i++) {
-            if(this.items.get(i).getName().equals(item.getName())) {
+            if (this.items.get(i).getName().equals(item.getName())) {
                 this.items.remove(i);
             }
         }
