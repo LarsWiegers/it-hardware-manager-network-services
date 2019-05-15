@@ -56,7 +56,7 @@ public class ItemController {
         }
         model.addAttribute("items", items);
         // TODO return an thymeleaf index page
-        return "welcome";
+        return "item-index";
     }
 
     /**
