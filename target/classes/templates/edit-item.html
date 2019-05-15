@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-    <span th:text="${item.name}">Text</span>
+    <form th:action="@{'http://localhost:8080/item/get/' + ${item.uuid} + '/edit'}" method="POST">
+        <input name="name" type="text" th:value="${item.name}">
+        <input name="description" type="text" th:value="${item.description}">
+        <input type="submit" value="Opslaan">
+    </form>
 </body>
 </html>

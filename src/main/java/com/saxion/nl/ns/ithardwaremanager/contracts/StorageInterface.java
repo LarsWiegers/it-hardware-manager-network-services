@@ -58,4 +58,6 @@ public interface StorageInterface {
      * @param room
      */
     void removeRoom(Room room);
+
+    void updateItem(Item item);
 }

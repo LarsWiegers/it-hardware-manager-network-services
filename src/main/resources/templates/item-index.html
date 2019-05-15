@@ -7,7 +7,7 @@
 <body>
     <ul>
         <li th:each="message : ${items}">
-            <a th:href="@{'/item/get/' + ${message.uuid}}" th:text="${message.name}">${message.name}</a>
+            <a th:href="@{'/item/get/' + ${message.uuid}} + '/edit/'" th:text="${message.name}">${message.name}</a>
             <span th:text="${message.description}">${message.description}</span>
         </li>
     </ul>

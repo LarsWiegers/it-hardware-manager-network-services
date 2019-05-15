@@ -41,6 +41,17 @@ public class Storage implements StorageInterface {
         }
     }
 
+    public void updateItem(Item item) {
+        for (Room room : rooms) {
+            for (int j = 0; j < room.getItems().size(); j++) {
+                Item currentItem = room.getItems().get(j);
+                if (currentItem.getUuid() == item.getUuid()) {
+                    room.getItems().set(j, item);
+                }
+            }
+        }
+    }
+
     public Item getItemByUUID(UUID uuid) {
         for (Room room : rooms) {
             for (Item item : room.getItems()) {

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li th:each="room : ${rooms}">
+        <a href="#" th:text="${room.name}">${room.name}</a>
+        <span th:text="${room.description}">${room.description}</span>
+        <span th:text="${room.uuid}">${room.uuid}</span>
+        <ul>
+            <li th:each="item : ${room.items}">
+                <a href="#" th:text="${item.name}">${item.name}</a>
+                <span th:text="${item.description}">${item.description}</span>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

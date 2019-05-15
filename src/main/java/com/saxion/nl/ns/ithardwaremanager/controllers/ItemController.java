@@ -6,9 +6,11 @@ import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -62,7 +64,7 @@ public class ItemController {
     /**
      * Show a page that allows the user to edit the item
      */
-    @GetMapping(path = "/get/{uuid}")
+    @GetMapping(path = "/get/{uuid}/edit")
     public String edit(@PathVariable UUID uuid,
                      Model model) {
         Item item = this.storage.getItemByUUID(uuid);
@@ -70,6 +72,20 @@ public class ItemController {
         System.out.println(item);
         // TODO return an thymeleaf index page
         return "edit-item";
+    }
+
+    /**
+     * Show a page that allows the user to edit the item
+     */
+    @PostMapping(path = "/get/{uuid}/edit")
+    public String update(@PathVariable UUID uuid,
+                         @RequestParam("name") String name,
+                         @RequestParam("description") String description) {
+        Item item = this.storage.getItemByUUID(uuid);
+        item.setName(name);
+        item.setDescription(description);
+        this.storage.updateItem(item);
+        return "redirect:/item";
     }
 
     /**
