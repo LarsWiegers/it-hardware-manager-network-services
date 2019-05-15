@@ -47,7 +47,6 @@ public class ItemController {
      * Return a list of items
      */
     @GetMapping(path = "")
-    @ResponseBody
     public String index() {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
@@ -55,7 +54,7 @@ public class ItemController {
             items.addAll(room.getItems());
         }
         // TODO return an thymeleaf index page
-        return items.toString();
+        return "welcome";
     }
 
     /**
