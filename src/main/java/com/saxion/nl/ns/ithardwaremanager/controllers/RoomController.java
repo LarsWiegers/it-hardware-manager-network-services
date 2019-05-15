@@ -5,6 +5,7 @@ import com.saxion.nl.ns.ithardwaremanager.StorageContainer;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -37,10 +38,10 @@ public class RoomController {
      * Get all rooms
      */
     @GetMapping(path = "")
-    @ResponseBody
-    public String index() {
+    public String index(Model model) {
         // TODO thymeleaf show page
-        return storage.getRooms().toString();
+        model.addAttribute("rooms", storage.getRooms());
+        return "room-index";
     }
 
     /**
