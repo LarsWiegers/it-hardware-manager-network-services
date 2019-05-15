@@ -63,9 +63,13 @@ public class ItemController {
      * Show a page that allows the user to edit the item
      */
     @GetMapping(path = "/get/{uuid}")
-    @ResponseBody
-    public void edit(@PathVariable UUID uuid) {
-        // TODO thymeleaf edit page
+    public String edit(@PathVariable UUID uuid,
+                     Model model) {
+        Item item = this.storage.getItemByUUID(uuid);
+        model.addAttribute("item", item);
+        System.out.println(item);
+        // TODO return an thymeleaf index page
+        return "edit-item";
     }
 
     /**
