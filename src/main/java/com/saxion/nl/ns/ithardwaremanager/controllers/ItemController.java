@@ -5,6 +5,7 @@ import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -47,12 +48,13 @@ public class ItemController {
      * Return a list of items
      */
     @GetMapping(path = "")
-    public String index() {
+    public String index(Model model) {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
         for (Room room : rooms) {
             items.addAll(room.getItems());
         }
+        model.addAttribute("items", items);
         // TODO return an thymeleaf index page
         return "welcome";
     }

@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    fklsdjflsdkj
+    <ul>
+        <li th:each="message : ${items}">
+            <a href="#" th:text="${message.name}">${message.name}</a>
+            <span th:text="${message.description}">${message.description}</span>
+        </li>
+    </ul>
 </body>
 </html>
