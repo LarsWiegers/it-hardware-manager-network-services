@@ -91,13 +91,10 @@ public class ItemController {
     /**
      * Remove the item from a room
      */
-    @PostMapping(path = "/remove/{roomUuid}/{itemUuid}")
+    @PostMapping(path = "/remove/{uuid}")
     @ResponseBody
-    public void remove(@PathVariable UUID roomUuid,
-                       @PathVariable UUID itemUuid) {
-        Room room = this.storage.getRoomByUUID(roomUuid);
-        Item item = this.storage.getItemByUUID(itemUuid);
-        room.removeItem(item);
-        this.storage.updateRoom(room);
+    public void remove(@PathVariable UUID uuid) {
+        Item item = this.storage.getItemByUUID(uuid);
+        this.storage.removeItem(item);
     }
 }
