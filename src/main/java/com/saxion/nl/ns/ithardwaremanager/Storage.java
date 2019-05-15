@@ -71,4 +71,15 @@ public class Storage implements StorageInterface {
             }
         }
     }
+    public void removeItem(Item item) {
+        UUID uuid = item.getUuid();
+        for (Room room : rooms) {
+            for (Item currentItem : room.getItems()) {
+                if (currentItem.getUuid().equals(uuid)) {
+                    room.getItems().remove(item);
+                    return;
+                }
+            }
+        }
+    }
 }

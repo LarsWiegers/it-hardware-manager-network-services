@@ -59,5 +59,17 @@ public interface StorageInterface {
      */
     void removeRoom(Room room);
 
+    /**
+     * Update the item
+     *
+     * @param item Item
+     */
     void updateItem(Item item);
+
+    /**
+     * Remove the item
+     *
+     * @param item Item
+     */
+    void removeItem(Item item);
 }
