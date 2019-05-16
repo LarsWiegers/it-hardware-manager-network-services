@@ -5,10 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{'http://localhost:8080/item/get/' + ${item.uuid} + '/edit'}" method="POST">
-    <input type="hidden" class="uuid" th:value="${item.uuid}">
-    <input name="name" type="text" th:value="${item.name}">
-    <input name="description" type="text" th:value="${item.description}">
+<form th:action="@{'http://localhost:8080/room/get/' + ${room.uuid} + '/edit'}" method="POST">
+    <input type="hidden" class="uuid" th:value="${room.uuid}">
+    <input name="name" type="text" th:value="${room.name}">
+    <input name="description" type="text" th:value="${room.description}">
     <input type="submit" value="Opslaan">
 </form>
 <button class="delete">
@@ -18,7 +18,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("button.delete").addEventListener("click", function () {
             const uuid = document.querySelector(".uuid").value;
-            fetch("http://localhost:8080/item/remove/" + uuid, {
+            fetch("http://localhost:8080/room/remove/" + uuid, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, cors, *same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -33,7 +33,7 @@
             })
                 .then(function (response) {
                     if (response.ok) {
-                        window.location.href = "http://localhost:8080/item";
+                        window.location.href = "http://localhost:8080/room";
                     }
                 })
         });

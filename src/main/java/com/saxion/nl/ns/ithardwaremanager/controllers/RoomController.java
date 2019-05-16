@@ -1,6 +1,5 @@
 package com.saxion.nl.ns.ithardwaremanager.controllers;
 
-import com.saxion.nl.ns.ithardwaremanager.Storage;
 import com.saxion.nl.ns.ithardwaremanager.StorageContainer;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
@@ -14,6 +13,9 @@ import java.util.UUID;
 @RequestMapping("/room")
 public class RoomController {
 
+    /**
+     * The storage for the items
+     */
     private StorageInterface storage;
 
     /**
@@ -49,22 +51,27 @@ public class RoomController {
      *
      * @param uuid UUID
      */
-    @GetMapping(path = "/get/{uuid}")
-    @ResponseBody
-    public String get(@PathVariable UUID uuid) {
-        // TODO thymeleaf show page
-        return storage.getRoomByUUID(uuid).toString();
+    @GetMapping(path = "/get/{uuid}/edit")
+    public String edit(@PathVariable UUID uuid,
+                       Model model) {
+        Room room = this.storage.getRoomByUUID(uuid);
+        model.addAttribute("room", room);
+        // TODO return an thymeleaf index page
+        return "edit-room";
     }
 
     /**
-     * Edit room by UUID
-     *
-     * @param uuid UUID
+     * Show a page that allows the user to edit the item
      */
-    @GetMapping(path = "/get/{uuid}/edit")
-    @ResponseBody
-    public void edit(@PathVariable UUID uuid) {
-        // TODO thymeleaf edit page
+    @PostMapping(path = "/get/{uuid}/edit")
+    public String update(@PathVariable UUID uuid,
+                         @RequestParam("name") String name,
+                         @RequestParam("description") String description) {
+        Room room = this.storage.getRoomByUUID(uuid);
+        room.setName(name);
+        room.setDescription(description);
+        this.storage.updateRoom(room);
+        return "redirect:/room";
     }
 
     /**
