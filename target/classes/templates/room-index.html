@@ -7,12 +7,12 @@
 <body>
 <ul>
     <li th:each="room : ${rooms}">
-        <a href="#" th:text="${room.name}">${room.name}</a>
+        <a th:href="@{'/room/get/' + ${room.uuid}} + '/edit/'" th:text="${room.name}">${room.name}</a>
         <span th:text="${room.description}">${room.description}</span>
         <span th:text="${room.uuid}">${room.uuid}</span>
         <ul>
             <li th:each="item : ${room.items}">
-                <a href="#" th:text="${item.name}">${item.name}</a>
+                <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
                 <span th:text="${item.description}">${item.description}</span>
             </li>
         </ul>

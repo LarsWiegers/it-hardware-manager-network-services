@@ -6,11 +6,9 @@ import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.UUID;
 
 @Controller

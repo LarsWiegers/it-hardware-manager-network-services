@@ -5,11 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-    <ul>
-        <li th:each="message : ${items}">
-            <a th:href="@{'/item/get/' + ${message.uuid}} + '/edit/'" th:text="${message.name}">${message.name}</a>
-            <span th:text="${message.description}">${message.description}</span>
-        </li>
-    </ul>
+<ul>
+    <li th:each="item : ${items}">
+        <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
+        <span th:text="${item.description}">${item.description}</span>
+    </li>
+</ul>
+<span th:if="${#lists.isEmpty(items)}">There are no items here</span>
 </body>
 </html>
