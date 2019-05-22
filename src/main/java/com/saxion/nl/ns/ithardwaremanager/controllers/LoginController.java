@@ -29,8 +29,14 @@ public class LoginController {
         this.storage = StorageContainer.getStorage();
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "")
     public String index() {
         return "login-index";
+    }
+
+    @PostMapping(path = "")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password) {
+        return "redirect:/room";
     }
 }
