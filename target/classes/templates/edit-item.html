@@ -5,39 +5,24 @@
     <title>Edit item</title>
 </head>
 <body>
-<form th:action="@{'http://localhost:8080/item/get/' + ${item.uuid} + '/edit'}" method="POST">
+<form th:if="${item != null}"
+      th:action="@{'http://localhost:8080/item/get/' + ${item.uuid} + '/edit'}" method="POST">
     <input type="hidden" class="uuid" th:value="${item.uuid}">
     <input name="name" type="text" th:value="${item.name}">
     <input name="description" type="text" th:value="${item.description}">
-    <input type="submit" value="Opslaan">
+    <input type="submit" value="Save">
 </form>
-<button class="delete">
-    Delete
-</button>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector("button.delete").addEventListener("click", function () {
-            const uuid = document.querySelector(".uuid").value;
-            fetch("http://localhost:8080/item/remove/" + uuid, {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, cors, *same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin', // include, *same-origin, omit
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrer: 'no-referrer', // no-referrer, *client
-                body: null, // body data type must match "Content-Type" header
-            })
-                .then(function (response) {
-                    if (response.ok) {
-                        window.location.href = "http://localhost:8080/item";
-                    }
-                })
-        });
-    });
-</script>
+<form   th:if="${item == null}"
+        th:action="@{'http://localhost:8080/item/add/' + ${roomUuid}}" method="POST">
+    <input name="name" type="text">
+    <input name="description" type="text">
+    <input type="submit" value="Create">
+</form>
+<form   th:if="${item != null}"
+        th:action="@{'http://localhost:8080/item/remove/' + ${item.uuid} + '/'}" method="POST">
+    <input type="hidden" class="hidden" name="delete" value="true">
+    <input type="hidden" class="uuid" th:value="${item.uuid}">
+    <input type="submit" value="Delete">
+</form>
 </body>
 </html>

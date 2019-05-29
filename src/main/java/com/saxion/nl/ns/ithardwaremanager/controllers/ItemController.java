@@ -4,6 +4,7 @@ import com.saxion.nl.ns.ithardwaremanager.StorageContainer;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,16 +33,27 @@ public class ItemController {
     /**
      * Add an item to an existing room
      *
-     * @param item     Item
      * @param roomUuid UUID
      */
-    @PostMapping(path = "/add/{roomUuid}")
-    @ResponseBody
-    public void add(@RequestBody Item item,
+    @GetMapping(path = "/add/{roomUuid}")
+    public String addView(@PathVariable UUID roomUuid) {
+        Room room = this.storage.getRoomByUUID(roomUuid);
+        return "edit-item";
+    }
+
+    /**
+     * Add an item to an existing room
+     *
+     * @param roomUuid UUID
+     */
+    @PostMapping(path = "/add/{roomUuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String add(@RequestParam("name") String name,
+                    @RequestParam("description") String description,
                     @PathVariable UUID roomUuid) {
         Room room = this.storage.getRoomByUUID(roomUuid);
-        room.addItem(item);
+        room.addItem(new Item(name, description));
         this.storage.updateRoom(room);
+        return "redirect:/item";
     }
 
     /**
@@ -90,9 +102,9 @@ public class ItemController {
      * Remove the item from a room
      */
     @PostMapping(path = "/remove/{uuid}")
-    @ResponseBody
-    public void remove(@PathVariable UUID uuid) {
+    public String remove(@PathVariable UUID uuid) {
         Item item = this.storage.getItemByUUID(uuid);
         this.storage.removeItem(item);
+        return "redirect:/item";
     }
 }
