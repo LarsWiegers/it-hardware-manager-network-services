@@ -3,6 +3,7 @@ package com.saxion.nl.ns.ithardwaremanager;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
+import com.saxion.nl.ns.ithardwaremanager.models.User;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -10,6 +11,8 @@ import java.util.UUID;
 public class Storage implements StorageInterface {
 
     private ArrayList<Room> rooms = new ArrayList<>();
+
+    private ArrayList<User> users = new ArrayList<>();
 
     public ArrayList<Room> getRooms() {
         return new ArrayList<>(rooms);
@@ -81,5 +84,15 @@ public class Storage implements StorageInterface {
                 }
             }
         }
+    }
+
+    @Override
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
+    @Override
+    public ArrayList<User> getUsers() {
+        return new ArrayList(this.users);
     }
 }

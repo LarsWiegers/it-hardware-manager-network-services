@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="../static/css/layout.css" th:href="@{/css/layout.css}" rel="stylesheet" />
+</head>
+<body>
+    <header th:insert="fragments/general.html :: header"> </header>
+    <main>
+        <form action="/register" method="POST">
+            <input type="text" name="email">
+            <input type="password" name="password">
+            <input type="submit" value="Register">
+        </form>
+    </main>
+</body>
+</html>
