@@ -48,8 +48,8 @@ public class ItemController {
      */
     @PostMapping(path = "/add/{roomUuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String add(@RequestParam("name") String name,
-                    @RequestParam("description") String description,
-                    @PathVariable UUID roomUuid) {
+                      @RequestParam("description") String description,
+                      @PathVariable UUID roomUuid) {
         Room room = this.storage.getRoomByUUID(roomUuid);
         room.addItem(new Item(name, description));
         this.storage.updateRoom(room);
@@ -60,12 +60,25 @@ public class ItemController {
      * Return a list of items
      */
     @GetMapping(path = "")
-    public String index(Model model) {
+    public String index(Model model,
+                        @RequestParam(defaultValue = "", value = "search") String search) {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
-        for (Room room : rooms) {
-            items.addAll(room.getItems());
+        if (!search.equals("")) {
+            for (Room room : rooms) {
+                for (Item item : room.getItems()) {
+                    if (item.getName().contains(search) ||
+                            item.getDescription().contains(search)) {
+                        items.add(item);
+                    }
+                }
+            }
+        } else {
+            for (Room room : rooms) {
+                items.addAll(room.getItems());
+            }
         }
+
         model.addAttribute("items", items);
         // TODO return an thymeleaf index page
         return "item-index";
@@ -76,7 +89,7 @@ public class ItemController {
      */
     @GetMapping(path = "/get/{uuid}/edit")
     public String edit(@PathVariable UUID uuid,
-                     Model model) {
+                       Model model) {
         Item item = this.storage.getItemByUUID(uuid);
         model.addAttribute("item", item);
         System.out.println(item);
