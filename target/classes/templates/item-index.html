@@ -6,6 +6,12 @@
 </head>
 <body>
 <a th:href="@{'/room'}">To add a item, please go to /room and choose a room there to add an item to it.</a>
+
+<form th:action="@{'http://localhost:8080/item'}" method="GET">
+    <input name="search" type="text">
+    <input type="submit" value="Search">
+</form>
+
 <ul>
     <li th:each="item : ${items}">
         <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
