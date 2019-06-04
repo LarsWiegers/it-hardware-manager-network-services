@@ -10,7 +10,7 @@
         <a th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
         <span th:text="${room.description}">${room.description}</span>
         <span th:text="${room.uuid}">${room.uuid}</span>
-        <a th:href="@{'/item/add/' + ${room.uuid}}" th:text="Add Item">Add</a>
+        <a th:href="@{'/item/add/' + ${room.uuid}}">Add Item</a>
         <ul>
             <li th:each="item : ${room.items}">
                 <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
@@ -18,7 +18,8 @@
             </li>
         </ul>
     </li>
-    <a th:href="@{'/room/add'}" th:text="Add">Add</a>
+    <a th:href="@{'/room/add'}">Add Room</a>
 </ul>
+<span th:if="${#lists.isEmpty(rooms)}">There are no rooms here</span>
 </body>
 </html>
