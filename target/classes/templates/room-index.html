@@ -5,6 +5,7 @@
     <title>Index Room</title>
 </head>
 <body>
+<span th:if="${#lists.isEmpty(rooms)}">There are no rooms here</span>
 <ul>
     <li th:each="room : ${rooms}">
         <a th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
@@ -20,6 +21,5 @@
     </li>
     <a th:href="@{'/room/add'}">Add Room</a>
 </ul>
-<span th:if="${#lists.isEmpty(rooms)}">There are no rooms here</span>
 </body>
 </html>

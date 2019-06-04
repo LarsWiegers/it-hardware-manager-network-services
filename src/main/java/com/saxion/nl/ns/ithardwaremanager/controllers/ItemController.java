@@ -64,7 +64,7 @@ public class ItemController {
     @GetMapping(path = "")
     public String index(Model model,
                         @RequestParam(defaultValue = "", value = "search") String search,
-                        @CookieValue(value = "lastSearchResult", defaultValue = "defaultValue") String lastSearchResult,
+                        @CookieValue(value = "lastSearchResult", defaultValue = "") String lastSearchResult,
                         HttpServletResponse response) {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
@@ -81,6 +81,8 @@ public class ItemController {
             searchCookie = new Cookie("lastSearchResult", search);
             response.addCookie(searchCookie);
         } else {
+            searchCookie = new Cookie("lastSearchResult", "");
+            response.addCookie(searchCookie);
             for (Room room : rooms) {
                 items.addAll(room.getItems());
             }

@@ -11,7 +11,8 @@
     <input name="search" type="text">
     <input type="submit" value="Search">
 </form>
-
+<a th:if="search != null" th:href="@{'/item?search=' + ${lastSearchResult}}" th:text="'Your last search was:' + ${lastSearchResult}">search result</a>
+<a th:if="search != null" th:href="@{'/item?search=' + ${search.getValue()}}" th:text="'Your current search was:' + ${search.getValue()}">search result</a>
 <ul>
     <li th:each="item : ${items}">
         <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
