@@ -7,7 +7,7 @@
 <body>
 <ul>
     <li th:each="room : ${rooms}">
-        <a th:href="@{'/room/get/' + ${room.uuid}} + '/edit/'" th:text="${room.name}">${room.name}</a>
+        <a th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
         <span th:text="${room.description}">${room.description}</span>
         <span th:text="${room.uuid}">${room.uuid}</span>
         <a th:href="@{'/item/add/' + ${room.uuid}}" th:text="Add Item">Add</a>
