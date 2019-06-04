@@ -4,6 +4,7 @@ import com.saxion.nl.ns.ithardwaremanager.StorageContainer;
 import com.saxion.nl.ns.ithardwaremanager.contracts.StorageInterface;
 import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,28 +33,52 @@ public class ItemController {
     /**
      * Add an item to an existing room
      *
-     * @param item     Item
      * @param roomUuid UUID
      */
-    @PostMapping(path = "/add/{roomUuid}")
-    @ResponseBody
-    public void add(@RequestBody Item item,
-                    @PathVariable UUID roomUuid) {
+    @GetMapping(path = "/add/{roomUuid}")
+    public String addView(@PathVariable UUID roomUuid) {
         Room room = this.storage.getRoomByUUID(roomUuid);
-        room.addItem(item);
+        return "edit-item";
+    }
+
+    /**
+     * Add an item to an existing room
+     *
+     * @param roomUuid UUID
+     */
+    @PostMapping(path = "/add/{roomUuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String add(@RequestParam("name") String name,
+                      @RequestParam("description") String description,
+                      @PathVariable UUID roomUuid) {
+        Room room = this.storage.getRoomByUUID(roomUuid);
+        room.addItem(new Item(name, description));
         this.storage.updateRoom(room);
+        return "redirect:/item";
     }
 
     /**
      * Return a list of items
      */
     @GetMapping(path = "")
-    public String index(Model model) {
+    public String index(Model model,
+                        @RequestParam(defaultValue = "", value = "search") String search) {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
-        for (Room room : rooms) {
-            items.addAll(room.getItems());
+        if (!search.equals("")) {
+            for (Room room : rooms) {
+                for (Item item : room.getItems()) {
+                    if (item.getName().contains(search) ||
+                            item.getDescription().contains(search)) {
+                        items.add(item);
+                    }
+                }
+            }
+        } else {
+            for (Room room : rooms) {
+                items.addAll(room.getItems());
+            }
         }
+
         model.addAttribute("items", items);
         // TODO return an thymeleaf index page
         return "item-index";
@@ -64,7 +89,7 @@ public class ItemController {
      */
     @GetMapping(path = "/get/{uuid}/edit")
     public String edit(@PathVariable UUID uuid,
-                     Model model) {
+                       Model model) {
         Item item = this.storage.getItemByUUID(uuid);
         model.addAttribute("item", item);
         System.out.println(item);
@@ -90,9 +115,9 @@ public class ItemController {
      * Remove the item from a room
      */
     @PostMapping(path = "/remove/{uuid}")
-    @ResponseBody
-    public void remove(@PathVariable UUID uuid) {
+    public String remove(@PathVariable UUID uuid) {
         Item item = this.storage.getItemByUUID(uuid);
         this.storage.removeItem(item);
+        return "redirect:/item";
     }
 }

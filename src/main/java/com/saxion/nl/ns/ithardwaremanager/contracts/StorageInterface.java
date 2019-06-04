@@ -2,6 +2,7 @@ package com.saxion.nl.ns.ithardwaremanager.contracts;
 
 import com.saxion.nl.ns.ithardwaremanager.models.Item;
 import com.saxion.nl.ns.ithardwaremanager.models.Room;
+import com.saxion.nl.ns.ithardwaremanager.models.User;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -72,4 +73,16 @@ public interface StorageInterface {
      * @param item Item
      */
     void removeItem(Item item);
+
+    /**
+     * Add a user
+     *
+     * @param user User
+     */
+    void addUser(User user);
+
+    /**
+     * @return Arraylist<User> users
+     */
+    ArrayList<User> getUsers();
 }

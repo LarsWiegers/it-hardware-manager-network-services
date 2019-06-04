@@ -11,6 +11,6 @@ public class LoginControllerTest {
 
     @Test
     public void thereIsALoginPage() {
-        Assert.assertNotEquals("", (new LoginController()).index());
+        Assert.assertNotEquals("", (new LoginController()).index(null));
     }
 }

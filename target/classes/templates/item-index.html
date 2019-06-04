@@ -5,6 +5,7 @@
     <title>Index item</title>
 </head>
 <body>
+<a th:href="@{'/room'}">To add a item, please go to /room and choose a room there to add an item to it.</a>
 <ul>
     <li th:each="item : ${items}">
         <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
