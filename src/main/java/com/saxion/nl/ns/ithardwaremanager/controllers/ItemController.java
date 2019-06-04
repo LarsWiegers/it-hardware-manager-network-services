@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -61,9 +63,12 @@ public class ItemController {
      */
     @GetMapping(path = "")
     public String index(Model model,
-                        @RequestParam(defaultValue = "", value = "search") String search) {
+                        @RequestParam(defaultValue = "", value = "search") String search,
+                        @CookieValue(value = "lastSearchResult", defaultValue = "defaultValue") String lastSearchResult,
+                        HttpServletResponse response) {
         ArrayList<Room> rooms = this.storage.getRooms();
         ArrayList<Item> items = new ArrayList<>();
+        Cookie searchCookie = null;
         if (!search.equals("")) {
             for (Room room : rooms) {
                 for (Item item : room.getItems()) {
@@ -73,6 +78,8 @@ public class ItemController {
                     }
                 }
             }
+            searchCookie = new Cookie("lastSearchResult", search);
+            response.addCookie(searchCookie);
         } else {
             for (Room room : rooms) {
                 items.addAll(room.getItems());
@@ -80,6 +87,9 @@ public class ItemController {
         }
 
         model.addAttribute("items", items);
+        model.addAttribute("lastSearchResult", lastSearchResult);
+        model.addAttribute("search", searchCookie);
+
         // TODO return an thymeleaf index page
         return "item-index";
     }
