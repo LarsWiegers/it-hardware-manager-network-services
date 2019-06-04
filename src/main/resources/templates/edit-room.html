@@ -5,15 +5,19 @@
     <title>Edit room</title>
 </head>
 <body>
-<form th:action="@{'http://localhost:8080/room/get/' + ${room.uuid} + '/edit'}" method="POST">
+<form th:if="${room != null}"
+      th:action="@{'http://localhost:8080/room/get/' + ${room.uuid} + '/edit'}" method="POST">
     <input type="hidden" class="uuid" th:value="${room.uuid}">
     <input name="name" type="text" th:value="${room.name}">
     <input name="description" type="text" th:value="${room.description}">
-    <input type="submit" value="Opslaan">
+    <input type="submit" value="Save">
 </form>
-<button class="delete">
-    Delete
-</button>
+<form th:if="${room == null}"
+      th:action="@{'http://localhost:8080/room/add'}" method="POST">
+    <input name="name" type="text">
+    <input name="description" type="text">
+    <input type="submit" value="Create">
+</form>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("button.delete").addEventListener("click", function () {

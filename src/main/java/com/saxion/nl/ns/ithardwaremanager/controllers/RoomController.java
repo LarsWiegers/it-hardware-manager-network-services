@@ -27,13 +27,20 @@ public class RoomController {
 
     /**
      * Add a new room with the added JSON in the body
-     *
-     * @param room Room
      */
     @PostMapping(path = "/add")
-    @ResponseBody
-    public void add(@RequestBody Room room) {
+    public String add(@RequestParam("name") String name,
+                      @RequestParam("description") String description,
+                      Model model) {
+        Room room = new Room(name, description);
         this.storage.addRoom(room);
+        model.addAttribute(room);
+        return "redirect:/room";
+    }
+
+    @GetMapping(path = "/add")
+    public String addRoom() {
+        return "edit-room";
     }
 
     /**
