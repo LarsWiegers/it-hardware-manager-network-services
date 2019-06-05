@@ -14,6 +14,12 @@ public class Storage implements StorageInterface {
 
     private ArrayList<User> users = new ArrayList<>();
 
+
+    Storage() {
+        this.users.add(new User("lars@saxion.nl", "larsPassword"));
+        this.users.add(new User("jesse@saxion.nl", "jessePassword"));
+    }
+
     public ArrayList<Room> getRooms() {
         return new ArrayList<>(rooms);
     }   
