@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit room</title>
+    <title>Login</title>
+    <link href="../static/css/layout.css" th:href="@{/css/layout.css}" rel="stylesheet" />
 </head>
 <body>
+<header th:insert="fragments/general.html :: header"> </header>
+<main>
 <form th:if="${room != null}"
       th:action="@{'http://localhost:8080/room/get/' + ${room.uuid} + '/edit'}" method="POST">
     <input type="hidden" class="uuid" th:value="${room.uuid}">
@@ -13,35 +16,15 @@
     <input type="submit" value="Save">
 </form>
 <form th:if="${room == null}"
-      th:action="@{'http://localhost:8080/room/add'}" method="POST">
+     th:action="@{'http://localhost:8080/room/add'}" method="POST">
     <input name="name" type="text">
     <input name="description" type="text">
     <input type="submit" value="Create">
 </form>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector("button.delete").addEventListener("click", function () {
-            const uuid = document.querySelector(".uuid").value;
-            fetch("http://localhost:8080/room/remove/" + uuid, {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, cors, *same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin', // include, *same-origin, omit
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrer: 'no-referrer', // no-referrer, *client
-                body: null, // body data type must match "Content-Type" header
-            })
-                .then(function (response) {
-                    if (response.ok) {
-                        window.location.href = "http://localhost:8080/room";
-                    }
-                })
-        });
-    });
-</script>
+<form th:if="${room != null}"
+      th:action="@{'http://localhost:8080/room/remove/' + ${room.uuid}}" method="POST">
+    <input type="submit" value="Delete">
+</form>
+</main>
 </body>
 </html>

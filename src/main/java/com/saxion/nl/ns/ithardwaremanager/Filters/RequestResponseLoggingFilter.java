@@ -25,7 +25,8 @@ public class RequestResponseLoggingFilter implements Filter {
         if(
             session.getAttribute("user") == null && (
             !(req.getRequestURL().toString().split("localhost:8080")[1].equals("/login")) &&
-            !(req.getRequestURL().toString().split("localhost:8080")[1].equals("/register"))
+            !(req.getRequestURL().toString().split("localhost:8080")[1].equals("/register")) &&
+            !(req.getRequestURL().toString().split("localhost:8080")[1].equals("/logout"))
             && !req.getRequestURL().toString().split("localhost:8080")[1].equals("/css/layout.css"))) {
             res.sendRedirect("/login");
         }

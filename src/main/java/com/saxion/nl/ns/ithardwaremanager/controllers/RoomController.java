@@ -87,9 +87,9 @@ public class RoomController {
      * @param uuid UUID
      */
     @PostMapping(path = "/remove/{uuid}")
-    @ResponseBody
-    public void remove(@PathVariable UUID uuid) {
+    public String remove(@PathVariable UUID uuid) {
         Room room = this.storage.getRoomByUUID(uuid);
         this.storage.removeRoom(room);
+        return "redirect:/room";
     }
 }
