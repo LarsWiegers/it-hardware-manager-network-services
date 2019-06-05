@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Room</title>
+    <title>Login</title>
+    <link href="../static/css/layout.css" th:href="@{/css/layout.css}" rel="stylesheet" />
 </head>
 <body>
-<span th:if="${#lists.isEmpty(rooms)}">There are no rooms here</span>
-<ul>
-    <li th:each="room : ${rooms}">
-        <a th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
-        <span th:text="${room.description}">${room.description}</span>
-        <span th:text="${room.uuid}">${room.uuid}</span>
-        <a th:href="@{'/item/add/' + ${room.uuid}}">Add Item</a>
+<header th:insert="fragments/general.html :: header"> </header>
+<main>
+<div class="content" th:if="${#lists.isEmpty(rooms)}">There are no rooms here
+    <a th:href="@{'/room/add'}">Add Room</a>
+</div>
+    <div class="content">
         <ul>
-            <li th:each="item : ${room.items}">
-                <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
-                <span th:text="${item.description}">${item.description}</span>
+            <li th:each="room : ${rooms}">
+                <a th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
+                <span th:text="${room.description}">${room.description}</span>
+                <span th:text="${room.uuid}">${room.uuid}</span>
+                <a th:href="@{'/item/add/' + ${room.uuid}}">Add Item</a>
+                <ul>
+                    <li th:each="item : ${room.items}">
+                        <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
+                        <span th:text="${item.description}">${item.description}</span>
+                    </li>
+                </ul>
             </li>
         </ul>
-    </li>
-    <a th:href="@{'/room/add'}">Add Room</a>
-</ul>
+    </div>
+<div class="content" th:if="${!#lists.isEmpty(rooms)}"><a th:href="@{'/room/add'}" >Add Room</a></div>
+</main>
 </body>
 </html>
