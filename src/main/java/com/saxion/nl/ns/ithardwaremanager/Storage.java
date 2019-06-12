@@ -18,6 +18,10 @@ public class Storage implements StorageInterface {
     Storage() {
         this.users.add(new User("lars@saxion.nl", "larsPassword"));
         this.users.add(new User("jesse@saxion.nl", "jessePassword"));
+
+        Room room = new Room("testRoom", "This is the description");
+        room.addItem(new Item("I am a item", "And this is my description"));
+        this.rooms.add(room);
     }
 
     public ArrayList<Room> getRooms() {
