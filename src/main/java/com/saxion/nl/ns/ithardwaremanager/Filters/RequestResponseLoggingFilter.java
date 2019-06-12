@@ -1,7 +1,6 @@
 package com.saxion.nl.ns.ithardwaremanager.Filters;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
