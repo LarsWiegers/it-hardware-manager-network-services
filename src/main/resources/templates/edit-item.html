@@ -17,8 +17,8 @@
 </form>
 <form   th:if="${item == null}"
         th:action="@{'http://localhost:8080/item/add/' + ${roomUuid}}" method="POST">
-    <input name="name" type="text">
-    <input name="description" type="text">
+    <input name="name" type="text" placeholder="Name">
+    <input name="description" type="text" placeholder="Description">
     <input type="submit" value="Create">
 </form>
 <form   th:if="${item != null}"

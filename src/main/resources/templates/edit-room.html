@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -17,8 +17,8 @@
 </form>
 <form th:if="${room == null}"
      th:action="@{'http://localhost:8080/room/add'}" method="POST">
-    <input name="name" type="text">
-    <input name="description" type="text">
+    <input name="name" type="text" placeholder="Name">
+    <input name="description" type="text" placeholder="Description">
     <input type="submit" value="Create">
 </form>
 <form th:if="${room != null}"
