@@ -8,6 +8,7 @@ public class Room implements Serializable {
     private String name;
     private ArrayList<Item> items = new ArrayList<>();
     private String description;
+    private String userWhoCreated;
     private UUID uuid;
 
     /**
@@ -21,6 +22,22 @@ public class Room implements Serializable {
         this.setDescription(description);
         this.setUuid(UUID.randomUUID());
     }
+
+    public Room(String name, String description, String userWhoCreated) {
+        this.setName(name);
+        this.setDescription(description);
+        this.setUserWhoCreated(userWhoCreated);
+        this.setUuid(UUID.randomUUID());
+    }
+
+    private void setUserWhoCreated(String userWhoCreated) {
+        this.userWhoCreated = userWhoCreated;
+    }
+
+    public String getUserWhoCreated() {
+        return this.userWhoCreated;
+    }
+
 
     public void setDescription(String description) {
         this.description = description;

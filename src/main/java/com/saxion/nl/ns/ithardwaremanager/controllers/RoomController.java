@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @Controller
@@ -31,8 +32,9 @@ public class RoomController {
     @PostMapping(path = "/add")
     public String add(@RequestParam("name") String name,
                       @RequestParam("description") String description,
+                      HttpSession session,
                       Model model) {
-        Room room = new Room(name, description);
+        Room room = new Room(name, description, session.getAttribute("user").toString());
         this.storage.addRoom(room);
         model.addAttribute(room);
         return "redirect:/room";

@@ -2,25 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Rooms</title>
     <link href="../static/css/layout.css" th:href="@{/css/layout.css}" rel="stylesheet" />
 </head>
 <body>
 <header th:insert="fragments/general.html :: header"> </header>
 <main>
 <div class="content" th:if="${#lists.isEmpty(rooms)}">There are no rooms here
-    <a th:href="@{'/room/add'}">Add Room</a>
+    <a class="button" th:href="@{'/room/add'}">Add Room</a>
 </div>
     <div class="content">
-        <ul>
-            <li th:each="room : ${rooms}">
-                <a th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
+        <ul id="list-container">
+            <li class="list-item" th:each="room : ${rooms}">
+                <p th:if="${room.userWhoCreated != null}" th:text="@{'Created by:' + ${room.userWhoCreated}}">Created by: ${room.userWhoCreated}</p>
+                <a class="button" th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
                 <span th:text="${room.description}">${room.description}</span>
-                <span th:text="${room.uuid}">${room.uuid}</span>
-                <a th:href="@{'/item/add/' + ${room.uuid}}">Add Item</a>
+                <a th:href="@{'/item/add/' + ${room.uuid}}" class="button">Add Item</a>
                 <ul>
                     <li th:each="item : ${room.items}">
-                        <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
+                        <a class="button" th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
                         <span th:text="${item.description}">${item.description}</span>
                     </li>
                 </ul>
