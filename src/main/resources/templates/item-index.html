@@ -17,9 +17,9 @@
         <a th:if="search != null" th:href="@{'/item?search=' + ${search.getValue()}}" th:text="'Your current search was:' + ${search.getValue()}">search result</a>
     </div>
     <div class="content">
-        <ul>
-            <li th:each="item : ${items}">
-                <a th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
+        <ul id="list-container">
+            <li class="list-item" th:each="item : ${items}">
+                <a class="button" th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
                 <span th:text="${item.description}">${item.description}</span>
                 <span th:text="${item.uuid}">${item.uuid}</span>
             </li>

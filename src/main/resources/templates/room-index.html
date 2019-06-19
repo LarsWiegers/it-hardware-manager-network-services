@@ -18,7 +18,7 @@
                 <a class="button" th:href="@{'/room/get/' + ${room.uuid} + '/edit/'}" th:text="${room.name}">${room.name}</a>
                 <span th:text="${room.description}">${room.description}</span>
                 <a th:href="@{'/item/add/' + ${room.uuid}}" class="button">Add Item</a>
-                <ul>
+                <ul th:if="${!#lists.isEmpty(room.items)}">
                     <li th:each="item : ${room.items}">
                         <a class="button" th:href="@{'/item/get/' + ${item.uuid}} + '/edit/'" th:text="${item.name}">${item.name}</a>
                         <span th:text="${item.description}">${item.description}</span>
