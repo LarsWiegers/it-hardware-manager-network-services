@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Component
-public class RequestResponseLoggingFilter implements Filter {
+public class AuthRedirectFilter implements Filter {
 
     @Override
     public void doFilter(
