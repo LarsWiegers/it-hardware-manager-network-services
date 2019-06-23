@@ -1,4 +1,4 @@
-package com.saxion.nl.ns.ithardwaremanager.Filters;
+package com.saxion.nl.ns.ithardwaremanager.filters;
 
 import org.springframework.stereotype.Component;
 
